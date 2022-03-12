@@ -1,0 +1,45 @@
+.sidebar{
+  @apply ml-3;
+}
+
+.sidebar-item{
+  position: absolute;
+  width: 215.22px;
+  height: 882.78px;
+  left: 33.93px;
+  top: 45.56px;
+}
+
+.logo{
+  /* @apply w-20;
+  @apply h-20; */
+  position: absolute;
+  width: 46.53px;
+  height: 46.53px;
+  left: 34.9px;
+  top: 45.56px;
+}
+
+ul{  
+  @apply list-none;
+  @apply m-0;
+  @apply p-0;
+}
+
+span{
+  @apply ml-4;
+  @apply h-3;
+}
+
+li{
+  @apply mb-6;
+}
+
+li a{
+  color: #A2A8C1;
+  font-weight: bold;
+}
+
+li a:hover{
+  color: #1B2A61;
+}
