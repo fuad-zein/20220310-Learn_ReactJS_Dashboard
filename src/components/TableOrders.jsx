@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TableOrders({ data }) {
-  console.log(data);
+  // console.log(data);
   return (
     <div className="bg-yellow-200 grid">
       <table class="table-fixed text-xs border-collapse border border-slate-400">
