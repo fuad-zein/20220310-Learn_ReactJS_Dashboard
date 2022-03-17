@@ -1,0 +1,19 @@
+.pages{
+  @apply w-screen;
+  @apply h-screen;
+  @apply grid;
+  @apply grid-cols-12;
+}
+
+.navigation{
+  @apply col-span-2;
+}
+
+.main{
+  @apply col-span-7;
+}
+
+.sidebar{
+  @apply col-span-3;
+  @apply bg-gray-lowbg;
+}

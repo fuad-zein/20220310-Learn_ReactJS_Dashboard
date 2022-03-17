@@ -1,17 +1,31 @@
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     screens: {
-      tablet: "640px",
-      // => @media (min-width: 640px) { ... }
-
-      laptop: "1024px",
-      // => @media (min-width: 1024px) { ... }
-
-      desktop: "1280px",
-      // => @media (min-width: 1280px) { ... }
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
     },
-    extend: {},
+
+    fontFamily: {
+      sans: ["Poppins", "Graphik", "sans-serif"],
+      serif: ["Merriweather", "serif"],
+    },
+
+    extend: {
+      colors: {
+        "blue-custom": "#1B2A61",
+        "gray-custom": "#B5BACF",
+        "gray-lowbg": "#F8F8FC",
+        "pink-custom": "#F6B8C4",
+        "gray-low": "#F1F1F9",
+        "pink-low": "#FCEBEE",
+        "violet-custom": "#6161EF",
+      },
+    },
   },
+
   plugins: [],
 };
