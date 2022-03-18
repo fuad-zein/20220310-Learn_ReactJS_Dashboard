@@ -15,10 +15,12 @@ export default function Main() {
   const [data, setData] = useState([]);
   // const [count, setCount] = useState(0);
   // const [minus, setMinus] = useState(10);
-  const [customers, setCustomers] = useState([]);
-  const [totalCustomers, setTotalCustomers] = useState(0);
-  const [totalIncome, setTotalIncome] = useState(0);
-  const [totalSold, setTotalSold] = useState(0);
+
+  // Fetch API
+  // const [customers, setCustomers] = useState([]);
+  // const [totalCustomers, setTotalCustomers] = useState(0);
+  // const [totalIncome, setTotalIncome] = useState(0);
+  // const [totalSold, setTotalSold] = useState(0);
 
   // Contoh useEffect for props or state values:
   // useEffect(() => {
@@ -34,36 +36,37 @@ export default function Main() {
   //   };
   // }, []);
 
-  useEffect(() => {
-    axios
-      .get("https://6229a392be12fc4538a38c09.mockapi.io/customer")
-      .then(function (response) {
-        const customers = response.data;
-        console.log(customers, "data");
-        // console.log(response.data[3].?customer);
-        let inc = 0;
-        let sol = 0;
-        const customer = customers.length;
-        for (let i = 0; i < customers.length; i++) {
-          console.log(customers[i].income);
-          inc += customers[i].income;
-          sol += customers[i].sold;
-        }
-        // console.log(inc);
-        // console.log(sol);
-        // setCustomers(response.data);
-        setTotalCustomers(customer);
-        setTotalIncome(inc);
-        setTotalSold(sol);
-      })
-      .catch(function (error) {
-        throw error;
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     // .get("https://6229a392be12fc4538a38c09.mockapi.io/customer")
+  //     .get("http://localhost:4000/order")
+  //     .then(function (response) {
+  //       const customers = response.data;
+  //       // console.log(customers, "data");
+  //       // console.log(response.data[3].?customer);
+  //       let inc = 0;
+  //       let sol = 0;
+  //       const customer = customers.length;
+  //       for (let i = 0; i < customers.length; i++) {
+  //         console.log(customers[i].income);
+  //         inc += customers[i].income;
+  //         sol += customers[i].sold;
+  //       }
+  //       // console.log(inc);
+  //       // console.log(sol);
+  //       // setCustomers(response.data);
+  //       setTotalCustomers(customer);
+  //       setTotalIncome(inc);
+  //       setTotalSold(sol);
+  //     })
+  //     .catch(function (error) {
+  //       throw error;
+  //     });
+  // }, []);
 
   useEffect(() => {
     axios
-      .get("https://6229a392be12fc4538a38c09.mockapi.io/dashboard")
+      .get("http://localhost:4000/dashboard")
       .then(function (response) {
         setData(response.data);
       })
@@ -81,7 +84,7 @@ export default function Main() {
   //   setMinus(minus - 1);
   // };
 
-  console.log(customers);
+  // console.log(customers);
   return (
     <div className="main">
       <div className="pt-10 px-10 w-full">
@@ -113,9 +116,9 @@ export default function Main() {
         </div> */}
 
         <div className="grid grid-cols-3 gap-3 mb-5">
-          <BoxMain title="CUSTOMERS" boxTotalValue={totalCustomers} />
+          {/* <BoxMain title="CUSTOMERS" boxTotalValue={totalCustomers} />
           <BoxMain title="INCOME" boxTotalValue={totalIncome} />
-          <BoxMain title="PRODUCTS SOLD" boxTotalValue={totalSold} />
+          <BoxMain title="PRODUCTS SOLD" boxTotalValue={totalSold} /> */}
         </div>
 
         <div className="pt-5">
