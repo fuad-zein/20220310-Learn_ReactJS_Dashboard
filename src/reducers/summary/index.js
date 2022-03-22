@@ -1,4 +1,4 @@
-import { GET_LIST_SUMMARY } from "../../actions/summaryAction";
+import { GET_LIST_SUMMARY } from "../../actions/SummaryAction";
 
 const initialState = {
   getListSummaryResult: false,
@@ -6,7 +6,7 @@ const initialState = {
   getListSummaryError: false,
 };
 
-const summaryReducer = (state = initialState, action) => {
+const SummaryReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_LIST_SUMMARY:
       return {
@@ -20,4 +20,4 @@ const summaryReducer = (state = initialState, action) => {
   }
 };
 
-export default summaryReducer;
+export default SummaryReducer;

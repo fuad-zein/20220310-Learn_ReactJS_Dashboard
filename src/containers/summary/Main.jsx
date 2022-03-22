@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 // import { useDispatch } from "react-redux";
 import axios from "axios";
-import BoxMain from "../../components/BoxMain.jsx";
+// import BoxMain from "../../components/BoxMain.jsx";
 import BoxSmall from "../../components/BoxSmall.jsx";
 import BoxBig from "../../components/BoxBig.jsx";
 import Search from "../../assets/search.svg";
 import Inventory from "../../assets/inventory.svg";
 import TableOrders from "../../components/TableOrders.jsx";
-// import { getListSummary } from "../../actions/summaryAction";
+// import { getListSummary } from "../../actions/SummaryAction";
 import "../../pages/Summary.css";
 
 export default function Main() {
