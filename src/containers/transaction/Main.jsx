@@ -1,38 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Trash from "../../components/Trash";
 import Edit from "../../components/Edit";
-import { getListTransaction } from "../../actions/TransactionAction.js";
+import CreateTransaction from "../../components/CreateTransaction";
+import {
+  getListTransaction,
+  deleteTransaction,
+  detailTransaction,
+} from "../../actions/TransactionAction.js";
 import "../../pages/Summary.css";
 
-export default function Main(index) {
+export default function Main() {
   const dispatch = useDispatch();
 
   const {
     listTransactionResult,
     listTransactionLoading,
     listTransactionError,
+    deleteTransactionResult,
   } = useSelector((state) => state.TransactionReducer);
 
   useEffect(() => {
     dispatch(getListTransaction());
-  }, [index, dispatch]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (deleteTransactionResult) {
+      dispatch(getListTransaction());
+    }
+  }, [deleteTransactionResult, dispatch]);
 
   return (
     <div className="main">
       <div className="pt-10 px-10 w-full">
-        <div className="flex mb-10">
+        <div className="flex mb-8">
           <h1 className="font-extrabold text-2xl w-full">
             Transaction Dashboard
           </h1>
         </div>
-        <div className="font-bold mb-5">
-          {/* {listTransactionResult.map((transaction) => {
-            return console.log(transaction);
-          })} */}
-          <p>Total Customer = ... orang</p>
-          <p>Total Income = ... rupiah</p>
-          <p>Total Sold Out = ... barang</p>
+        <div className="grid grid-cols-3">
+          <div className="col-span-2 border-r-2 border-gray-custom mb-6">
+            <CreateTransaction />
+          </div>
+          <div className="col-span-1 ml-4">
+            <div className="font-bold mb-5 text-base">
+              <p>Total Customer = ... orang</p>
+              <p>Total Income = ... rupiah</p>
+              <p>Total Sold Out = ... barang</p>
+            </div>
+          </div>
         </div>
         <div>
           <table className="table-fixed border-collapse border-4 border-slate-500 text-lg">
@@ -47,7 +63,6 @@ export default function Main(index) {
             <tbody>
               {listTransactionResult ? (
                 listTransactionResult.map((transaction) => {
-                  // console.log(transaction, "transaction");
                   return (
                     <tr>
                       <td className="border-4 border-slate-600 pl-2">
@@ -60,10 +75,19 @@ export default function Main(index) {
                         {transaction.sold}
                       </td>
                       <td className="border-4 border-slate-600 text-center">
-                        <button className="mr-4">
+                        <button
+                          className="mr-4"
+                          onClick={() =>
+                            dispatch(detailTransaction(transaction))
+                          }
+                        >
                           <Edit />
                         </button>
-                        <button>
+                        <button
+                          onClick={() =>
+                            dispatch(deleteTransaction(transaction.id))
+                          }
+                        >
                           <Trash />
                         </button>
                       </td>

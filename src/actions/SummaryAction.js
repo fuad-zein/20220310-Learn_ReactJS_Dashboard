@@ -15,7 +15,7 @@ export const getListSummary = () => {
 
     axios({
       method: "GET",
-      url: "https://6229a392be12fc4538a38c09.mockapi.io/dashboard",
+      url: "http://localhost:4000/dashboard",
       timeout: 120000,
     })
       .then((response) => {
