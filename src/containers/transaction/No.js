@@ -1,3 +1,5 @@
+// Coreatan dari Main Transaction
+
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getListTransaction } from "../../actions/TransactionAction";
