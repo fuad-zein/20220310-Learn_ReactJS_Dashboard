@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Trash from "../../components/Trash";
 import Edit from "../../components/Edit";
@@ -12,6 +12,10 @@ import "../../pages/Summary.css";
 
 export default function Main() {
   const dispatch = useDispatch();
+  const [totalIncomes, setTotalIncomes] = useState(0);
+  const [totalSolds, setTotalSolds] = useState(0);
+  const [totalCustomers, setTotalCustomers] = useState(0);
+  // const [coba, setCoba] = useState(inc, sol, customers ? true : false);
 
   const {
     listTransactionResult,
@@ -44,9 +48,9 @@ export default function Main() {
           </div>
           <div className="col-span-1 ml-4">
             <div className="font-bold mb-5 text-base">
-              <p>Total Customer = ... orang</p>
-              <p>Total Income = ... rupiah</p>
-              <p>Total Sold Out = ... barang</p>
+              <p>Total Customer = {totalCustomers} orang</p>
+              <p>Total Income = {totalIncomes} rupiah</p>
+              <p>Total Sold Out = {totalSolds} barang</p>
             </div>
           </div>
         </div>
@@ -60,15 +64,30 @@ export default function Main() {
                 <th className="border-4 border-slate-600">DESCRIPTION</th>
               </tr>
             </thead>
-            <tbody>
-              {listTransactionResult ? (
-                listTransactionResult.map((transaction) => {
-                  return (
+            {listTransactionResult ? (
+              listTransactionResult.map((transaction) => {
+                // console.log(transaction);
+                let inc = 0;
+                let sol = 0;
+                const customer = listTransactionResult.length;
+                for (let i = 0; i < listTransactionResult.length; i++) {
+                  inc += +listTransactionResult[i].income;
+                  sol += +listTransactionResult[i].sold;
+                  // console.log(+listTransactionResult[i].income);
+                }
+                // how to setState to get totalIncomes, totalSolds, totalCustomers
+                setTotalIncomes(inc);
+                setTotalSolds(sol);
+                setTotalCustomers(customer);
+
+                return (
+                  <tbody>
                     <tr>
                       <td className="border-4 border-slate-600 pl-2">
                         {transaction.customer}
                       </td>
                       <td className="border-4 border-slate-600 text-center">
+                        {/* input number */}
                         {transaction.income}
                       </td>
                       <td className="border-4 border-slate-600 text-center">
@@ -92,18 +111,16 @@ export default function Main() {
                         </button>
                       </td>
                     </tr>
-                  );
-                })
-              ) : listTransactionLoading ? (
-                <div className="text-center">Loading...</div>
-              ) : listTransactionError ? (
-                <div className="text-center">
-                  {listTransactionError + "..."}
-                </div>
-              ) : (
-                <div className="text-center">Data Kosong</div>
-              )}
-            </tbody>
+                  </tbody>
+                );
+              })
+            ) : listTransactionLoading ? (
+              <div className="text-center">Loading...</div>
+            ) : listTransactionError ? (
+              <div className="text-center">{listTransactionError + "..."}</div>
+            ) : (
+              <div className="text-center">Data Kosong</div>
+            )}
           </table>
         </div>
       </div>

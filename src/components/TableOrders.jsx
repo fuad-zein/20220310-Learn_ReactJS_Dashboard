@@ -13,12 +13,12 @@ export default function TableOrders() {
 
   return (
     <div className="mt-3">
-      <table class="table-fixed text-sm">
-        <tbody className="">
-          <div>
-            {getListSummaryResult ? (
-              getListSummaryResult.map((data) => {
-                return (
+      <div className="">
+        {getListSummaryResult ? (
+          getListSummaryResult.map((data) => {
+            return (
+              <table className="table-fixed text-sm">
+                <tbody>
                   <tr className="border">
                     <td className="p-2 text-center border-4 border-slate-300">
                       {data.id}
@@ -27,7 +27,12 @@ export default function TableOrders() {
                       {data.goodsname}
                     </td>
                     <td className="text-center border-4 border-slate-300">
-                      {data.date}
+                      {/* {data.date} */}
+                      {new Intl.DateTimeFormat("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      }).format(new Date(data.date))}
                     </td>
                     <td className="text-center border-4 border-slate-300">
                       {data.price}
@@ -36,16 +41,16 @@ export default function TableOrders() {
                       {data.status}
                     </td>
                   </tr>
-                );
-              })
-            ) : getListSummaryLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <p>{getListSummaryError ? getListSummaryError : "Data Kosong"}</p>
-            )}
-          </div>
-        </tbody>
-      </table>
+                </tbody>
+              </table>
+            );
+          })
+        ) : getListSummaryLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <p>{getListSummaryError ? getListSummaryError : "Data Kosong"}</p>
+        )}
+      </div>
     </div>
   );
 }
