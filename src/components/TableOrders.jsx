@@ -20,13 +20,13 @@ export default function TableOrders() {
               <table className="table-fixed text-sm">
                 <tbody>
                   <tr className="border">
-                    <td className="p-2 text-center border-4 border-slate-300">
+                    <td className="p-2 text-center border-4 border-slate-300 w-10">
                       {data.id}
                     </td>
-                    <td className="text-center border-4 border-slate-300">
+                    <td className="text-center border-4 border-slate-300 w-60">
                       {data.goodsname}
                     </td>
-                    <td className="text-center border-4 border-slate-300">
+                    <td className="text-center border-4 border-slate-300 w-40">
                       {/* {data.date} */}
                       {new Intl.DateTimeFormat("en-US", {
                         year: "numeric",
@@ -34,10 +34,10 @@ export default function TableOrders() {
                         day: "2-digit",
                       }).format(new Date(data.date))}
                     </td>
-                    <td className="text-center border-4 border-slate-300">
+                    <td className="text-center border-4 border-slate-300 w-32">
                       {data.price}
                     </td>
-                    <td className="text-center border-4 border-slate-300">
+                    <td className="text-center border-4 border-slate-300 w-64">
                       {data.status}
                     </td>
                   </tr>

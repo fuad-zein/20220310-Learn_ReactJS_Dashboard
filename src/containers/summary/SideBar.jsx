@@ -1,6 +1,8 @@
-import React from "react";
-import SegitigaHijau from "../../assets/segitiga-green.svg";
-import SegitigaMerah from "../../assets/segitiga-red.svg";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getListTransaction } from "../../actions/TransactionAction.js";
+import RedTriangle from "../../components/RedTriangle.jsx";
+import GreenTriangle from "../../components/GreenTriangle.jsx";
 import Folder from "../../assets/folder.svg";
 import Price from "../../assets/price.svg";
 import BoxSide from "../../components/BoxSide";
@@ -10,6 +12,45 @@ import Foot from "../../assets/foot.svg";
 import "../../pages/Summary.css";
 
 export default function SideBar() {
+  const [totalIncomes, setTotalIncomes] = useState(0);
+  const [totalSolds, setTotalSolds] = useState(0);
+  const [totalCustomers, setTotalCustomers] = useState(0);
+  // const [plus, setPlus] = useState(0);
+  // const [minus, setMinus] = useState(0);
+  // const [total, setTotal] = useState(0);
+  const dispatch = useDispatch();
+
+  const { listTransactionResult } = useSelector(
+    (state) => state.TransactionReducer
+  );
+
+  const total = totalIncomes + totalSolds + totalCustomers;
+
+  const handlePlus = () => {
+    // penjumlahan semua total
+  };
+
+  const handleMinus = () => {
+    // pengurangan semua total
+  };
+
+  useEffect(() => {
+    dispatch(getListTransaction());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (listTransactionResult && listTransactionResult.length > 0) {
+      let inc = 0;
+      let sol = 0;
+      for (let i = 0; i < listTransactionResult.length; i++) {
+        inc += +listTransactionResult[i].income;
+        sol += +listTransactionResult[i].sold;
+      }
+      setTotalIncomes(inc);
+      setTotalSolds(sol);
+      setTotalCustomers(listTransactionResult.length);
+    }
+  }, [listTransactionResult]);
   return (
     <div className="sidebar">
       <div className="pt-10 px-10">
@@ -23,16 +64,23 @@ export default function SideBar() {
             <button className="text-md ml-28">:</button>
           </div>
           <div>
-            <h1 className="pt-3 text-2xl font-bold">$10 632.00</h1>
+            <h1 className="pt-3 text-2xl font-bold">
+              {/* format mata uang rupiah */}
+              {new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+              }).format(total)}
+              {/* {total} */}
+            </h1>
           </div>
           <div className="pt-3 grid grid-cols-2">
-            <button className="flex">
-              <img src={SegitigaHijau} alt="segitiga" className="w-4" />
-              <p className="text-xs ml-1 text-gray-custom"> + 10</p>
+            <button className="flex items-center" onClick={handlePlus}>
+              <GreenTriangle />
+              <p className="text-xs ml-4 text-gray-custom"> + Rp 1.00,00</p>
             </button>
-            <button className="flex">
-              <img src={SegitigaMerah} alt="segitiga" className="w-4" />
-              <p className="text-xs ml-1 text-gray-custom"> - 10</p>
+            <button className="flex items-center" onClick={handleMinus}>
+              <RedTriangle />
+              <p className="text-xs ml-4 text-gray-custom"> - Rp 1.00,00</p>
             </button>
           </div>
         </div>
