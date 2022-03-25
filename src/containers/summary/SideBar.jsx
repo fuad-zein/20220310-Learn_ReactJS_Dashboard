@@ -12,26 +12,19 @@ import Foot from "../../assets/foot.svg";
 import "../../pages/Summary.css";
 
 export default function SideBar() {
-  const [totalIncomes, setTotalIncomes] = useState(0);
-  const [totalSolds, setTotalSolds] = useState(0);
-  const [totalCustomers, setTotalCustomers] = useState(0);
-  // const [plus, setPlus] = useState(0);
-  // const [minus, setMinus] = useState(0);
-  // const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
 
   const { listTransactionResult } = useSelector(
     (state) => state.TransactionReducer
   );
 
-  const total = totalIncomes + totalSolds + totalCustomers;
-
   const handlePlus = () => {
-    // penjumlahan semua total
+    setTotal((total) => total + 100);
   };
 
   const handleMinus = () => {
-    // pengurangan semua total
+    setTotal((total) => total - 100);
   };
 
   useEffect(() => {
@@ -46,9 +39,7 @@ export default function SideBar() {
         inc += +listTransactionResult[i].income;
         sol += +listTransactionResult[i].sold;
       }
-      setTotalIncomes(inc);
-      setTotalSolds(sol);
-      setTotalCustomers(listTransactionResult.length);
+      setTotal(inc + sol + listTransactionResult.length);
     }
   }, [listTransactionResult]);
   return (
