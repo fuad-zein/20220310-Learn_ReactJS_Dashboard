@@ -64,7 +64,13 @@ export default function Main() {
           <div className="col-span-1 ml-4">
             <div className="font-bold mb-5 text-base">
               <p>Total Customer = {totalCustomers} orang</p>
-              <p>Total Income = {totalIncomes} rupiah</p>
+              <p>
+                Total Income ={" "}
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(totalIncomes)}
+              </p>
               <p>Total Sold Out = {totalSolds} barang</p>
             </div>
           </div>

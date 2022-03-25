@@ -49,7 +49,13 @@ export default function Main() {
 
         <div className="grid grid-cols-3 gap-3 mb-5">
           <BoxMain title="CUSTOMERS" boxTotalValue={totalCustomers} />
-          <BoxMain title="INCOME" boxTotalValue={totalIncomes} />
+          <BoxMain
+            title="INCOME"
+            boxTotalValue={new Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+            }).format(totalIncomes)}
+          />
           <BoxMain title="PRODUCTS SOLD" boxTotalValue={totalSolds} />
         </div>
 
