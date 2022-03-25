@@ -15,7 +15,6 @@ export default function Main() {
   const [totalIncomes, setTotalIncomes] = useState(0);
   const [totalSolds, setTotalSolds] = useState(0);
   const [totalCustomers, setTotalCustomers] = useState(0);
-  // const [coba, setCoba] = useState(inc, sol, customers ? true : false);
 
   const {
     listTransactionResult,
@@ -33,6 +32,22 @@ export default function Main() {
       dispatch(getListTransaction());
     }
   }, [deleteTransactionResult, dispatch]);
+
+  useEffect(() => {
+    if (listTransactionResult && listTransactionResult.length > 0) {
+      let inc = 0;
+      let sol = 0;
+      // const customer = listTransactionResult.length;
+      for (let i = 0; i < listTransactionResult.length; i++) {
+        inc += +listTransactionResult[i].income;
+        sol += +listTransactionResult[i].sold;
+        // console.log(+listTransactionResult[i].income);
+      }
+      setTotalIncomes(inc);
+      setTotalSolds(sol);
+      setTotalCustomers(listTransactionResult.length);
+    }
+  }, [listTransactionResult]);
 
   return (
     <div className="main">
@@ -66,20 +81,6 @@ export default function Main() {
             </thead>
             {listTransactionResult ? (
               listTransactionResult.map((transaction) => {
-                // console.log(transaction);
-                let inc = 0;
-                let sol = 0;
-                const customer = listTransactionResult.length;
-                for (let i = 0; i < listTransactionResult.length; i++) {
-                  inc += +listTransactionResult[i].income;
-                  sol += +listTransactionResult[i].sold;
-                  // console.log(+listTransactionResult[i].income);
-                }
-                // how to setState to get totalIncomes, totalSolds, totalCustomers
-                setTotalIncomes(inc);
-                setTotalSolds(sol);
-                setTotalCustomers(customer);
-
                 return (
                   <tbody>
                     <tr>
