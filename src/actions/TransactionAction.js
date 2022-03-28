@@ -47,14 +47,14 @@ export const getListTransaction = () => {
 
 export const addTransaction = (data) => {
   return (dispatch) => {
-    dispatch({
-      type: ADD_TRANSACTION,
-      payload: {
-        loading: true,
-        data: false,
-        errorMessage: false,
-      },
-    });
+    // dispatch({
+    //   type: ADD_TRANSACTION,
+    //   payload: {
+    //     loading: true,
+    //     data: false,
+    //     errorMessage: false,
+    //   },
+    // });
 
     axios({
       method: "POST",
@@ -63,6 +63,7 @@ export const addTransaction = (data) => {
       data: data,
     })
       .then((response) => {
+        console.log("post sukses");
         dispatch({
           type: ADD_TRANSACTION,
           payload: {

@@ -13,7 +13,7 @@ export default function CreateTransaction({ setTampung }) {
   const [id, setId] = useState("");
   const dispatch = useDispatch();
   const {
-    addTransactionResult,
+    // listTransactionResult,
     detailTransactionResult,
     updateTransactionResult,
   } = useSelector((state) => state.TransactionReducer);
@@ -39,17 +39,21 @@ export default function CreateTransaction({ setTampung }) {
           sold: sold,
         })
       );
-    }
-  };
-
-  useEffect(() => {
-    if (addTransactionResult) {
-      dispatch(getListTransaction());
       setCustomer("");
       setIncome("");
       setSold("");
     }
-  }, [addTransactionResult, dispatch]);
+  };
+
+  // useEffect(() => {
+  //   if (handleSubmit) {
+  //     dispatch(getListTransaction());
+  //     setCustomer("");
+  //     setIncome("");
+  //     setSold("");
+  //   }
+  //   console.log("useEffect");
+  // }, [dispatch]);
 
   useEffect(() => {
     if (detailTransactionResult) {
@@ -72,6 +76,7 @@ export default function CreateTransaction({ setTampung }) {
 
   return (
     <div className="antialiased">
+      <p>coba</p>
       <p className="font-bold text-base mb-3">
         {id ? "Edit Transaction" : "Create Transaction"}
       </p>

@@ -11,9 +11,9 @@ const initialState = {
   listTransactionLoading: false,
   listTransactionError: false,
 
-  addTransactionResult: false,
-  addTransactionLoading: false,
-  addTransactionError: false,
+  // addTransactionResult: false,
+  // addTransactionLoading: false,
+  // addTransactionError: false,
 
   deleteTransactionResult: false,
   deleteTransactionLoading: false,
@@ -29,6 +29,7 @@ const initialState = {
 const TransactionReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_LIST_TRANSACTION:
+      console.log(action.payload.data, " action getlistTransaction");
       return {
         ...state,
         listTransactionResult: action.payload.data,
@@ -37,11 +38,17 @@ const TransactionReducer = (state = initialState, action) => {
       };
 
     case ADD_TRANSACTION:
+      console.log(action.payload.data, " action addlistTransaction");
+      console.log(state, "state add");
+      const array = state.listTransactionResult;
+      array.push(action.payload.data);
+      console.log(array, "array");
       return {
         ...state,
-        addTransactionResult: action.payload.data,
-        addTransactionLoading: action.payload.loading,
-        addTransactionError: action.payload.errorMessage,
+        // listTransactionResult: action.payload.data,
+        listTrasancationResult: array,
+        listTransactionLoading: action.payload.loading,
+        listTransactionError: action.payload.errorMessage,
       };
 
     case DELETE_TRANSACTION:
